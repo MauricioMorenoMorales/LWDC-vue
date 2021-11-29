@@ -7,8 +7,15 @@ const app = Vue.createApp({
 			name2: '',
 			name3: 'leela web dev',
 			name4: 'Vbind name',
+			name5: '',
+			capitalizedName: '',
 			confirmedName: '',
 		};
+	},
+	watch: {
+		name5() {
+			this.capitalizedName = this.name5.toUpperCase();
+		},
 	},
 	computed: {
 		fullName() {
