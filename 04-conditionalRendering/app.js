@@ -1,26 +1,23 @@
 const app = Vue.createApp({
 	data() {
 		return {
-			boxASelected: false,
-			boxBSelected: false,
-			boxCSelected: false,
-			boxDSelected: false,
+			hobbies: [],
+			enteredHobbyValue: '',
+			userDetails: {
+				firsName: 'Leela',
+				lastName: 'Web Dev',
+				age: 34,
+			},
 		};
 	},
 	methods: {
-		onBoxSelected(box) {
-			if (box === 'A') this.boxASelected = !this.boxASelected;
-			else if (box === 'B') this.boxBSelected = !this.boxBSelected;
-			else if (box === 'D') this.boxDSelected = !this.boxDSelected;
-			else this.boxCSelected = !this.boxCSelected;
+		onHobbySubmit() {
+			if (this.enteredHobbyValue === '') return;
+			this.hobbies.push(this.enteredHobbyValue);
+			this.enteredHobbyValue = '';
 		},
-	},
-	computed: {
-		boxCClases() {
-			return { active: this.boxCSelected };
-		},
-		boxDClases() {
-			return { active: this.boxDSelected };
+		removeHobby(index) {
+			this.hobbies.splice(index, 1);
 		},
 	},
 });

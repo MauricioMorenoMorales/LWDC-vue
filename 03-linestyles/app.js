@@ -20,7 +20,7 @@ const app = Vue.createApp({
 			return { active: this.boxCSelected };
 		},
 		boxDClases() {
-			return { active: this.boxDSelected };
+			return { active: this };
 		},
 	},
 });
