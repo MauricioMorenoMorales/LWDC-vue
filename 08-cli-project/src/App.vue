@@ -1,29 +1,41 @@
-<template>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<button @click="changeTitle">Click To change The Title</button>
-				<h2>Posts</h2>
-				<div v-for="post in posts" :key="post.title">
-					<single-post :post-data="post" :isactive="1" />
-				</div>
-			</div>
-		</div>
-		<single-post />
-	</div>
+<template lang="pug">
+div.container
+	div.row
+		div.col-md-8
+			div.my-4
+				select-component(
+					data-status="1"
+					id="selectbox"
+					@change="selectChange"
+				)
+			button(@click="changeTitle") Clic to Change The Title
+			h2 Posts
+			div(v-for="post in posts" :key="post.title")
+				single-post(
+					:post-data="post"
+					:isactive="1"
+					@title-changed="onTitleChanged"
+				)
+		div.col-md-4
+			h3 Latest posts
+			ul.list-group
+				li.list-group-item(v-for="post in posts" :key="post.title") {{post.title}}
 </template>
 
 <script>
+import { SelectComponent } from './components';
 export default {
 	name: 'App',
 	data() {
 		return {
 			posts: [
 				{
+					id: 1,
 					title: 'New post 1',
 					description: 'Post description',
 				},
 				{
+					id: 2,
 					title: 'New post 2',
 					description: 'Post description',
 				},
@@ -31,10 +43,20 @@ export default {
 		};
 	},
 	methods: {
+		onTitleChanged(event) {
+			let index = this.posts.findIndex(post => post.id === event.id);
+			this.posts[index].title = event.title;
+		},
 		changeTitle() {
 			this.posts[0].title = 'Change the title in parent';
 			this.posts[1].title = 'Change the title in parent';
 		},
+		selectChange(event) {
+			console.log(event.target.value);
+		},
+	},
+	components: {
+		SelectComponent,
 	},
 };
 </script>

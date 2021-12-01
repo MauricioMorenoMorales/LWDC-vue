@@ -7,9 +7,10 @@ div(:class="{'bgcolor-gray': isactive}")
 
 <script>
 export default {
+	emits: ['title-changed'],
 	data() {
 		return {
-			post: this.postData,
+			post: { ...this.postData },
 		};
 	},
 	props: {
@@ -31,6 +32,7 @@ export default {
 	methods: {
 		changeTitle() {
 			this.post.title = 'changed the title';
+			this.$emit('titleChanged', this.post);
 		},
 	},
 };
@@ -41,5 +43,5 @@ export default {
 .title
 	color: red
 .bgcolor-gray
-	background-color: $red
+	background-color: #cecece
 </style>
