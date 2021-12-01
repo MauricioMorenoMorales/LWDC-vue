@@ -1,4 +1,7 @@
-import { createApp } from 'vue'
-import App from './App.vue'
+import { createApp } from 'vue';
+import App from './App.vue';
+import { SinglePost } from './components';
 
-createApp(App).mount('#app')
+const app = createApp(App);
+app.component('SinglePost', SinglePost);
+app.mount('#app');
