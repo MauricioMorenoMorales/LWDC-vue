@@ -3,6 +3,9 @@ div.container
 	div.row
 		div.col-md-8
 			div.my-4
+				div {{user}}
+				button(@click.prevent="changeUser") Click To change user name
+			div.my-4
 				select-component(
 					data-status="1"
 					id="selectbox"
@@ -24,6 +27,7 @@ div.container
 
 <script>
 import { SelectComponent } from './components';
+import { computed } from 'vue';
 export default {
 	name: 'App',
 	data() {
@@ -40,6 +44,7 @@ export default {
 					description: 'Post description',
 				},
 			],
+			user: 'Leela Web Dev',
 		};
 	},
 	methods: {
@@ -54,11 +59,30 @@ export default {
 		selectChange(event) {
 			console.log(event.target.value);
 		},
+		changeUser(user) {
+			if (user) {
+				this.user = user;
+			} else this.user = 'Another name';
+		},
 	},
 	components: {
 		SelectComponent,
 	},
+	// provide: {
+	// 	// user: 'another way to manage this'
+	// },
+	provide() {
+		return {
+			user: computed(() => this.user),
+			changeUser: this.changeUser,
+		};
+	},
 };
 </script>
 
-<style lang="sass" scoped></style>
+<style lang="sass" scoped>
+h2
+	color: red
+	font-size: 50px
+	font-weight: bold
+</style>
