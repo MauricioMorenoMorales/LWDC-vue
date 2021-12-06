@@ -7,11 +7,13 @@ div
 				th Id
 				th Title
 				th Description
+				th Actions
 		tbody
 			tr(v-for="post in postDetails" :key="post[id]")
 				td {{post.id}}
 				td {{post.title}}
 				td {{post.description}}
+				td: router-link.btn.btn-primary(:to="`/posts/${post.id}`") Show Details
 </template>
 
 <script>
@@ -23,11 +25,9 @@ export default {
 		};
 	},
 	mounted() {
-		axios
-			.get(`https://vue-completecourse.firebaseio.com/posts.json`)
-			.then(response => {
-				this.formatPosts(response.data);
-			});
+		axios.get(`/posts.json`).then(response => {
+			this.formatPosts(response.data);
+		});
 	},
 	methods: {
 		formatPosts(postsData) {

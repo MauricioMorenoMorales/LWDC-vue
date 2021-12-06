@@ -24,7 +24,7 @@ export default {
 	methods: {
 		onCreatePost() {
 			axios
-				.post(`https://vue-completecourse.firebaseio.com/posts.json`, {
+				.post(`/posts.json`, {
 					title: this.title,
 					description: this.description,
 				})

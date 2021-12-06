@@ -2,10 +2,13 @@ import { createRouter, createWebHistory } from 'vue-router';
 import Home from '../views/Home.vue';
 import Posts from '../views/Posts.vue';
 import CreatePost from '../views/CreatePost.vue';
+import PostItem from '../views/PostItem.vue';
+import NotFound from '../views/NotFound.vue';
 
 const routes = [
 	{
 		path: '/',
+		redirect: '/posts',
 		name: 'Home',
 		component: Home,
 	},
@@ -13,6 +16,10 @@ const routes = [
 		path: '/posts',
 		name: 'Posts',
 		component: Posts,
+	},
+	{
+		path: '/posts/:id',
+		component: PostItem,
 	},
 	{
 		path: '/create-post',
@@ -27,6 +34,10 @@ const routes = [
 		// which is lazy-loaded when the route is visited.
 		component: () =>
 			import(/* webpackChunkName: "about" */ '../views/About.vue'),
+	},
+	{
+		path: '/:NotFound(.*)*',
+		component: NotFound,
 	},
 ];
 
