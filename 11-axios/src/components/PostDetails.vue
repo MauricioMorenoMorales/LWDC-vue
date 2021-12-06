@@ -15,7 +15,7 @@ div
 </template>
 
 <script>
-import axios from 'axios';
+import axiosInstance from '../services/axiosInstance.service';
 export default {
 	data() {
 		return {
@@ -27,8 +27,8 @@ export default {
 	},
 	methods: {
 		getPostDetails() {
-			axios
-				.get(`https://vue-completecourse.firebaseio.com/posts.json`)
+			axiosInstance
+				.get(`/posts.json`)
 				.then(response => {
 					this.formatPostDetails(response.data);
 				})
