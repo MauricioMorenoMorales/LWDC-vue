@@ -4,6 +4,7 @@ import Posts from '../views/Posts.vue';
 import CreatePost from '../views/CreatePost.vue';
 import PostItem from '../views/PostItem.vue';
 import NotFound from '../views/NotFound.vue';
+import NoPost from '../views/NoPost.vue';
 
 const routes = [
 	{
@@ -14,12 +15,19 @@ const routes = [
 	},
 	{
 		path: '/posts',
-		name: 'Posts',
+		name: 'posts',
 		component: Posts,
-	},
-	{
-		path: '/posts/:id',
-		component: PostItem,
+		children: [
+			{
+				path: '',
+				component: NoPost,
+			},
+			{
+				path: ':id',
+				name: 'single-post',
+				component: PostItem,
+			},
+		],
 	},
 	{
 		path: '/create-post',

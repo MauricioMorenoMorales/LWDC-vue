@@ -30,6 +30,7 @@ export default {
 		// 	() => this.$route.params,
 		// 	params => this.getPostDetails(),
 		// );
+		console.log(this.$route.query);
 		this.getPostDetails();
 	},
 	methods: {

@@ -1,19 +1,23 @@
 <template lang="pug">
-div
-	h3 Post Details
-	table.table
-		thead
-			tr
-				th Id
-				th Title
-				th Description
-				th Actions
-		tbody
-			tr(v-for="post in postDetails" :key="post[id]")
-				td {{post.id}}
-				td {{post.title}}
-				td {{post.description}}
-				td: router-link.btn.btn-primary(:to="`/posts/${post.id}`") Show Details
+.row
+	.col-md-8
+		div
+			h3 Post Details
+			table.table
+				thead
+					tr
+						th Id
+						th Title
+						th Description
+						th Actions
+				tbody
+					tr(v-for="post in postDetails" :key="post[id]")
+						td {{post.id}}
+						td {{post.title}}
+						td {{post.description}}
+						td: router-link.btn.btn-primary(:to="{name: 'single-post', params: {id: post.id}, query: {sort: 'asc'}}") Show Details
+	.col-md-4
+		router-view
 </template>
 
 <script>
