@@ -19,6 +19,8 @@
 		.col-md-6
 			.my-3
 				transition-events
+			.my-3
+				list-data
 </template>
 
 <script>
@@ -27,6 +29,8 @@ import AnimatedParagraph from './components/AnimateParagraph.vue';
 import DialogModal from './components/DialogModal.vue';
 import AnimateButton from './components/AnimateButton.vue';
 import TransitionEvents from './components/TransitionEvents.vue';
+import ListData from './components/ListData.vue';
+
 export default {
 	name: 'App',
 	data() {
@@ -42,6 +46,7 @@ export default {
 		DialogModal,
 		AnimateButton,
 		TransitionEvents,
+		ListData,
 	},
 	methods: {
 		onAnimateClick() {

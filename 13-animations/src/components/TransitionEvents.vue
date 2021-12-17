@@ -4,10 +4,13 @@
 		name="button"
 		mode="out-in"
 		@before-enter="beforeEnter"
-		@after-enter="afterEnter"
 		@enter="enter"
+		@after-enter="afterEnter"
 		@before-leave="beforeLeave"
+		@leave="leave"
 		@after-leave="afterLeave"
+		@enter-cancelled="enterCancelled"
+		@leave-cancelled="leaveCancelled"
 	)
 		button.btn.btn-danger(v-if="showOnButton" @click.prevent="showOnButton = false") Off
 		button.btn.btn-primary(v-else @click.prevent="showOnButton = true") On
@@ -29,10 +32,7 @@ export default {
 			console.log('before enter');
 			element.style.opacity = 0;
 		},
-		afterEnter() {
-			console.log('After enter');
-		},
-		enter(element) {
+		enter(element, done) {
 			console.log('enter');
 			let step = 0.01;
 			let opacity = 0;
@@ -41,14 +41,20 @@ export default {
 				element.style.opacity = opacity;
 				if (opacity >= 1) {
 					clearInterval(interval);
+					done();
 				}
 			}, 20);
 		},
+		afterEnter() {
+			console.log('After enter');
+		},
+		enterCancelled() {},
 		beforeLeave(element) {
 			element.style.opacity = 1;
 			console.log('before leave');
 		},
-		afterLeave(element) {
+		leave(element, done) {
+			console.log('Leave');
 			let step = 0.01;
 			let opacity = 1;
 			const interval = setInterval(() => {
@@ -56,12 +62,14 @@ export default {
 				element.style.opacity = opacity;
 				if (opacity <= 0) {
 					clearInterval(interval);
+					done();
 				}
 			}, 20);
 		},
-		leave(element) {
-			console.log('leave');
+		afterLeave(element, done) {
+			console.log('After Leave');
 		},
+		leaveCancelled() {},
 	},
 };
 </script>
